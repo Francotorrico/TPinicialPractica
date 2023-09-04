@@ -1,0 +1,32 @@
+// Agregar un evento submit al formulario
+document.getElementById("formulario").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evitar que el formulario se envíe
+
+            // Obtener los valores de los campos de entrada
+            var pregnanciesValue = document.getElementById("Pregnancies").value;
+            var glucoseValue = document.getElementById("Glucose").value;
+            var bloodPressureValue = document.getElementById("BloodPressure").value;
+            var skinThicknessValue = document.getElementById("SkinThickness").value;
+            var insulinValue = document.getElementById("Insulin").value;
+            var bmiValue = document.getElementById("BMI").value;
+            var diabetesPedigreeFunctionValue = document.getElementById("DiabetesPedigreeFunction").value;
+            var Age = document.getElementById("Age").value;
+
+            // Obtener los valores de las otras entradas de formulario de manera similar
+
+            // Mostrar los valores en la consola
+            var formData = {
+                pregnancies: pregnanciesValue,
+                glucose: glucoseValue,
+                bloodPressure: bloodPressureValue,
+                skinThickness: skinThicknessValue,
+                insulin: insulinValue,
+                bmi: bmiValue,
+                diabetesPedigreeFunction: diabetesPedigreeFunctionValue,
+                age: Age
+            };
+            console.log(formData);
+           
+});
+const form= document.forms.formulario;
+console.log(form);

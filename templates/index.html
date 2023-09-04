@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificacion diabetes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+
+<body class="bg-light">
+  <header>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Machine Learning</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <button class="btn btn-dark">
+            <a class="nav-link active text-light" href="#seccion1">Integrantes</a>
+          </button>
+          <!-- Contenido del menú desplegable (eliminado) -->
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  </header>
+  <main>
+    
+    <div class="m-5">
+      <h2>Formulario de solicitud</h2>
+    </div>
+
+    <!-- Formulario -->
+    <div class="container col-lg-7 fw-bold">
+
+        <form id="formulario" action="{{url_for('predict')}}" method="post">
+          <div class=" col-md-6  text-secondary ">
+            Pregnancies
+            <input type="number" class="form-control" step="any" placeholder="Pregnancies" id="Pregnancies">
+            <label for=""></label>
+          </div>
+          <div class=" col-md-6  text-secondary ">
+            Glucose<input type="number" step="any" class="form-control" placeholder="Glucose" id="Glucose" name="Glucose">
+            <label for=""></label>
+          </div>
+          <div class=" col-md-6  text-secondary ">
+            BloodPressure<input type="number" step="any" class="form-control" placeholder="BloodPressure" id="BloodPressure" name="BloodPressure">
+            <label for=""></label>
+          </div>
+          <div class=" col-md-6  text-secondary ">
+            SkinThickness<input type="number" step="any" class="form-control" placeholder="SkinThickness" id="SkinThickness">
+            <label for=""></label>
+          </div>
+          <div class=" col-md-6  text-secondary ">
+            Insulin<input type="number" step="any" class="form-control" placeholder="Insulin" id="Insulin" name="Insulin">
+            <label for=""></label>
+          </div>
+          <div class=" col-md-6  text-secondary ">
+            BMI<input type="number" step="any" class="form-control" placeholder="BMI" id="BMI"  name="BMI">
+            <label for=""></label>
+          </div>
+          <div class=" col-md-6  text-secondary ">
+            DiabetesPedigreeFunction<input type="number" step="any" class="form-control" placeholder="DiabetesPedigreeFunction" id="DiabetesPedigreeFunction" name="DiabetesPedigreeFunction">
+            <label for=""></label>
+          </div>
+          <div class=" col-md-6  text-secondary ">
+            Age<input type="number"  step="any" class="form-control" placeholder="Age" id="Age" name="Age">
+            <label for=""></label>
+          </div>
+          <div class="col-lg-6">
+            <button class="btn btn-success border-0 w-100" type="submit" value="Clasificar">Enviar</button>
+          </div>
+
+                
+        </form>
+    </div>
+    <div class="m-5">
+      
+      <div id="resultado" class="result">
+        
+            <h2>Resultado de Clasificación:</h2>
+            <p id="resultado"> resultado </p>
+      
+    </div>
+    </div>
+      
+
+  </main>
+
+
+  <div id="seccion1" class="col-sm-5 container m-5">
+    <h3 class="text-secondary fw-bold">Integrantes:</h3>
+    <ul class="list-group list-group-light">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <div class="fw-bold">Nahuel Clauser</div>
+          <div class="text-muted">@gmail.com</div>
+        </div>
+        <span class="badge rounded-pill badge-success">Activo</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <div class="fw-bold">Franco Torrico</div>
+          <div class="text-muted">francotorrico1999@gmail.com</div>
+        </div>
+        <span class="badge rounded-pill badge-primary">Activo</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <div class="fw-bold">Federico Gomez</div>
+          <div class="text-muted">@gmail.com</div>
+        </div>
+        <span class="badge rounded-pill badge-warning">Activo</span>
+      </li>
+    </ul>
+  </div>
+  
+      <footer>
+
+      </footer>
+
+      <script>
+        // Realizar una solicitud GET a la ruta de Flask
+        fetch('/predicted')
+            .then(response => response.json())
+            .then(data => {
+                // Usar los datos recibidos en JavaScript
+                document.getElementById('resultado').textContent = data.resultado;
+            })
+            .catch(error => {
+                console.error('Error al obtener datos:', error);
+            });
+    </script>
+    
+      <script src="js/scriptForm"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+
+</html>
