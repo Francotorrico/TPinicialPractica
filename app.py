@@ -2,8 +2,6 @@ from flask import Flask, render_template, request
 import pandas as pd
 from joblib import dump, load
 from jinja2.utils import escape
-from werkzeug import BaseResponse
-
 # Resto de tu código aquí
 
 
