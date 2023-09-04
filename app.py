@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 import pandas as pd
 from joblib import dump, load
 from jinja2.utils import escape
+from itsdangerous import json as itsdangerous_json  # Cambia el nombre de la importación
 
 
 with open('diabetesCLasificacion.joblib','rb') as f:
