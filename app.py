@@ -1,8 +1,8 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, request
 import pandas as pd
 from joblib import dump, load
 from jinja2.utils import escape
-from itsdangerous import json as itsdangerous_json  # Cambia el nombre de la importación
+#from itsdangerous import json as itsdangerous_json  # Cambia el nombre de la importación
 
 
 with open('diabetesCLasificacion.joblib','rb') as f:
@@ -51,7 +51,7 @@ def predict():
         else:
             datos = {'resultado': 'El modelo predice que no tiene diabetes.'}
             print("El modelo predice que no tiene diabetes.")
-        return jsonify(datos)
+        return datos
 
 if __name__ == '__main__':
     app.run(debug=True)
