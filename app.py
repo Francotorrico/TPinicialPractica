@@ -1,6 +1,8 @@
 from flask import Flask, render_template, jsonify, request
 import pandas as pd
 from joblib import dump, load
+from jinja2.utils import escape
+
 
 with open('diabetesCLasificacion.joblib','rb') as f:
     model = load(f)
