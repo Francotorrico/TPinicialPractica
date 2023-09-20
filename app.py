@@ -61,7 +61,7 @@ def predict():
     
     except Exception as e:
         return jsonify({'error': str(e)}), 400  # Devuelve una respuesta JSON con código 400 (Bad Request) en caso de error
-'''
+'''  ***
 @app.route('/predicted', methods=['POST'])
 def predict():
         Glucose=float(request.form['Glucose'])
