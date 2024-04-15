@@ -1,15 +1,13 @@
 name: Manual trigger
 
 on:
+  push:
+    branches:
+      - franco-pagos-qa
   workflow_dispatch:
-    inputs:
-      name:
-        description: "Who to greet"
-        default: "World"
-jobs:
-    hello:
-        runs-on: ubuntu-latest
 
-        steps:
-        - name: Hello Step
-          run: echo "Hello ${{ github.event.inputs.name }}"
+jobs:
+  ci-pagos-qa:
+    if: github.ref == 'refs/heads/franco-pagos-qa' || github.event.inputs.environment == 'QA'
+    runs-on: ubuntu-latest
+
