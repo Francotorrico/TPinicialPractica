@@ -1,4 +1,4 @@
-name: Manual trigger
+name: Manual workflow
 
 on:
   workflow_dispatch:
@@ -12,18 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run workflow on selected branch
-        uses: actions/github-script@v5
+        if: github.ref == 'refs/heads/${{ github.event.inputs.branch }}'
+        uses: octokit/request-action@v2.x
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const branch = "${{ github.event.inputs.branch }}";
-            console.log(`Running workflow on branch: ${branch}`);
-
-            const octokit = github.getOctokit("${{ secrets.GITHUB_TOKEN }}");
-            const response = await octokit.actions.createWorkflowDispatch({
-              owner: "${{ github.repository_owner }}",
-              repo: "${{ github.repository }}",
-              workflow_id: "${{ github.workflow }}",
-              ref: `refs/heads/${branch}`
-            });
-            console.log(response.data);
+          route: POST /repos/${{ github.repository }}/actions/workflows/dispatches
+          ref: ${{ github.event.inputs.branch }}
