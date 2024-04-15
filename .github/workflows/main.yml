@@ -1,19 +1,19 @@
-name: Manual workflow
+name: Manual trigger
 
 on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Seleccione el branch de destino'
+        description: 'Branch name'
         required: true
 
 jobs:
-  run-on-selected-branch:
+  check-branch:
+    name: branch - ${{ github.ref_name }}
     runs-on: ubuntu-latest
+    environment: development
     steps:
-      - name: Run workflow on selected branch
-        if: github.ref == 'refs/heads/${{ github.event.inputs.branch }}'
-        uses: octokit/request-action@v2.x
+      - uses: actions/checkout@v2
         with:
-          route: POST /repos/${{ github.repository }}/actions/workflows/dispatches
           ref: ${{ github.event.inputs.branch }}
+      # Add your build steps here
