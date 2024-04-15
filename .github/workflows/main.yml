@@ -1,13 +1,29 @@
 name: Manual trigger
 
 on:
-  push:
-    branches:
-      - franco-pagos-qa
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Seleccione el branch de destino'
+        required: true
 
 jobs:
-  ci-pagos-qa:
-    if: github.ref == 'refs/heads/franco-pagos-qa' || github.event.inputs.environment == 'QA'
+  run-on-selected-branch:
     runs-on: ubuntu-latest
+    steps:
+      - name: Run workflow on selected branch
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const branch = "${{ github.event.inputs.branch }}";
+            console.log(`Running workflow on branch: ${branch}`);
 
+            const octokit = github.getOctokit("${{ secrets.GITHUB_TOKEN }}");
+            const response = await octokit.actions.createWorkflowDispatch({
+              owner: "${{ github.repository_owner }}",
+              repo: "${{ github.repository }}",
+              workflow_id: "${{ github.workflow }}",
+              ref: `refs/heads/${branch}`
+            });
+            console.log(response.data);
